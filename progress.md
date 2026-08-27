@@ -1,0 +1,50 @@
+# 進捗ログ（美容室LINE自動応答bot）
+
+## 2026-08-27
+
+### やったこと
+
+- SUPABASE_SERVICE_ROLE_KEYを`.env.local`に設定
+- LINE Developersチャネル接続：ngrokでlocalhost:3000を公開し、Webhook URLをLINE Developers Consoleに設定・検証
+- Echo応答の実機動作確認（LINEアプリから送信したメッセージがそのまま返信されることを確認、devサーバーログでも200応答を確認）
+- Claude API連携によるFAQ自動応答を実装
+  - `src/lib/claude.ts`：Anthropicクライアント初期化
+  - `src/lib/faq.ts`：Supabaseからfaq/menus全件取得
+  - `src/lib/answerGenerator.ts`：Claude Haiku 4.5 + 構造化出力（Zod）でcategory/confidence（高中低）/answer/matchedFaqIdを生成
+  - `src/app/api/line-webhook/route.ts`：Echo実装から本実装（FAQ検索→Claude回答生成→確信度が低い場合はオーナーへpush通知＋顧客には保留メッセージ、それ以外はClaude回答をそのまま返信、いずれもconversationsテーブルへ記録）に置き換え
+  - 型チェック（`tsc --noEmit`）通過を確認
+- 使用モデルはClaude Haiku 4.5を選定（低コスト重視の当初予算方針に合わせてユーザーが選択）
+
+### 次にやること
+
+- `ANTHROPIC_API_KEY` / `OWNER_LINE_USER_ID` を `.env.local` に設定
+- LINEアプリからの実機テスト（FAQ該当質問／メニュー質問／該当なし質問の3パターンでconfidence判定とエスカレーションを確認）
+
+### 困っていること / 質問
+
+- 特になし
+
+### 使用した Claude Code 機能
+
+- Plan Mode / Supabase MCP / claude-apiスキル
+
+## 2026-08-26
+
+### やったこと
+
+- Supabaseにfaq / menus / conversationsテーブルを作成（RLS有効、migration適用）
+- faq/menusはanon・authenticatedに公開読み取り権限を付与、conversationsはservice_role専用に設定
+- テーブル作成後、Supabase側で3テーブルが想定通り反映されていることを確認
+
+### 次にやること
+
+- FAQ判定ロジック（キーワードマッチ）の実装（wbs.md 3-2）
+- Supabaseのfaqテーブルからのデータ取得処理の実装（wbs.md 3-3）
+
+### 困っていること / 質問
+
+- 特になし
+
+### 使用した Claude Code 機能
+
+- Supabase MCP
