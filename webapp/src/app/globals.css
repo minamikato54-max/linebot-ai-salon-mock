@@ -12,12 +12,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/*
+ * このアプリは常に明るい配色（CLAUDE.md記載のstone/rose配色）で表示する設計のため、
+ * スマホのダークモード設定に連動して背景・文字色が変わるのは意図しない挙動。
+ * create-next-appの初期テンプレートに含まれていたダークモード対応を無効化している。
+ */
 
 body {
   background: var(--background);

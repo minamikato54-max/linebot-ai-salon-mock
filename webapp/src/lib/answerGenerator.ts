@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
-import { claude } from "@/lib/claude";
+import { openai } from "@/lib/openai";
 import type { Faq, Menu } from "@/lib/faq";
 
 const AnswerSchema = z.object({
@@ -28,6 +27,8 @@ const AnswerSchema = z.object({
 
 export type GeneratedAnswer = z.infer<typeof AnswerSchema>;
 
+const MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
+
 const SYSTEM_PROMPT = `あなたは美容室の公式LINEアカウントでお客様からの質問に自動応答するアシスタントです。
 
 # 厳守事項
@@ -42,7 +43,16 @@ const SYSTEM_PROMPT = `あなたは美容室の公式LINEアカウントでお�
 # category（分類）
 - faq: 営業時間・予約可否・駐車場など、メニュー価格以外のよくある質問
 - menu: メニュー内容・料金に関する質問
-- other: 上記どちらにも当てはまらない質問（世間話、無関係な質問など）`;
+- other: 上記どちらにも当てはまらない質問（世間話、無関係な質問など）
+
+# 出力形式
+必ず以下のキーを持つ有効なJSONオブジェクトのみを出力してください。説明文・前置き・コードブロック記法（\`\`\`）は一切含めないこと。
+{
+  "category": "faq" | "menu" | "other",
+  "confidence": "高" | "中" | "低",
+  "answer": string,
+  "matchedFaqId": string または null（根拠にしたFAQのid。UUID形式）
+}`;
 
 function formatFaqData(faqRows: Faq[], menuRows: Menu[]): string {
   const faqText = faqRows
@@ -64,24 +74,23 @@ export async function generateAnswer(
   faqRows: Faq[],
   menuRows: Menu[],
 ): Promise<GeneratedAnswer> {
-  const response = await claude.messages.parse({
-    model: "claude-haiku-4-5",
-    max_tokens: 1024,
-    system: SYSTEM_PROMPT,
+  const response = await openai.chat.completions.create({
+    model: MODEL,
+    response_format: { type: "json_object" },
     messages: [
+      { role: "system", content: SYSTEM_PROMPT },
       {
         role: "user",
         content: `${formatFaqData(faqRows, menuRows)}\n\n# お客様からの質問\n${userMessage}`,
       },
     ],
-    output_config: {
-      format: zodOutputFormat(AnswerSchema),
-    },
   });
 
-  if (!response.parsed_output) {
-    throw new Error("Claudeの構造化出力の解析に失敗しました");
+  const content = response.choices[0]?.message?.content;
+  if (!content) {
+    throw new Error("OpenAIからの応答が空でした");
   }
 
-  return response.parsed_output;
+  const parsedJson: unknown = JSON.parse(content);
+  return AnswerSchema.parse(parsedJson);
 }
