@@ -8,6 +8,8 @@ const variantClass = {
   primary: "bg-rose-500 text-white hover:bg-rose-600",
   secondary: "bg-stone-200 text-stone-800 hover:bg-stone-300",
   danger: "bg-red-500 text-white hover:bg-red-600",
+  // 色はclassNameで指定する（呼び出し側で背景に合わせた色を自由に設定するためのバリアント）
+  plain: "",
 } as const;
 
 type Variant = keyof typeof variantClass;
