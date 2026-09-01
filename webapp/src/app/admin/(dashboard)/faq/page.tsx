@@ -26,7 +26,11 @@ export default async function FaqListPage() {
             </p>
           )}
           <div className="flex gap-2">
-            <ButtonLink href={`/admin/faq/${faq.id}/edit`} variant="secondary">
+            <ButtonLink
+              href={`/admin/faq/${faq.id}/edit`}
+              variant="plain"
+              className="bg-green-100 text-black"
+            >
               編集
             </ButtonLink>
             <DeleteButton action={deleteFaqAction.bind(null, faq.id)} />

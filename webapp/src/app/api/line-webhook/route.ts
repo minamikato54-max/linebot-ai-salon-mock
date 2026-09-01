@@ -63,7 +63,7 @@ async function handleEvent(event: webhook.Event) {
       messages: [
         {
           type: "text",
-          text: `【未対応質問】\nお客様: ${userMessage}\n\n(AI回答案・確信度低のため未送信)\n${result.answer}`,
+          text: `【未対応質問】\nお客様: ${userMessage}\n\n${result.answer}`,
         },
       ],
     });

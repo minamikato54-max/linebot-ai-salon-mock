@@ -29,7 +29,8 @@ export default async function MenusListPage() {
           <div className="flex gap-2">
             <ButtonLink
               href={`/admin/menus/${menu.id}/edit`}
-              variant="secondary"
+              variant="plain"
+              className="bg-green-100 text-black"
             >
               編集
             </ButtonLink>

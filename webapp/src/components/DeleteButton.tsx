@@ -9,7 +9,11 @@ export function DeleteButton({ action }: { action: () => Promise<void> }) {
 
   if (!confirming) {
     return (
-      <Button variant="secondary" onClick={() => setConfirming(true)}>
+      <Button
+        variant="plain"
+        className="bg-red-100 text-black"
+        onClick={() => setConfirming(true)}
+      >
         削除
       </Button>
     );
