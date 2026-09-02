@@ -1,5 +1,39 @@
 # 進捗ログ（美容室LINE自動応答bot）
 
+## 2026-09-02
+
+### やったこと
+
+- **管理画面で「色が全く表示されない」不具合の調査・解決**
+  - サーバー・コード側は完全に正常（curl・Playwrightでの自動ブラウザ再現テストいずれも問題なし）と判明
+  - ユーザー側の切り分け（プライベートタブ、Safari「気を散らす項目を非表示」、Wi-Fi/回線）を一つずつ実施するも改善せず
+  - Plan Modeで再調査 → Exploreサブエージェントによるコードの網羅的再監査でも原因見つからず（UA判定・CSPヘッダー・Service Worker等いずれも問題なし）
+  - 調査中に見つけた軽微な実害のある不具合（`globals.css`のbodyルールがTailwind v4のcascade layer外にあり、フォント指定を無条件に上書きしていた）は修正
+  - 最終的に、**devサーバー＋ngrokトンネルという一時的な構成自体が根本原因**と判断し、Vercelへの本番デプロイに切り替えることで解決
+- **Vercelへの初回デプロイ**
+  - Vercel CLIログイン、プロジェクトリンク（`mim2543/webapp`）
+  - 必要な環境変数（LINE関連・Supabase・OpenAI・OWNER_LINE_USER_ID・ADMIN_PASSWORD）をすべてVercelのProduction/Preview環境に設定
+  - ビルドエラー（`/admin/conversations`をビルド時に静的生成しようとしてSupabase接続エラー）を発見・修正。管理画面配下を`force-dynamic`に変更
+  - Vercelのデフォルト保護機能（Vercel Authentication、SSOログイン要求）が有効だったため、ユーザーにダッシュボードで無効化してもらった上で本番デプロイ完了
+  - **新しい本番URL: `https://webapp-six-omega-78.vercel.app`**（今後はこちらを使用。devサーバー・ngrokへの依存がなくなった）
+- **UI改善**：FAQ一覧・メニュー一覧・会話ログ・お知らせ配信の各ページ左下に、画面に固定表示される「← 戻る」ボタンを追加（管理画面トップへ迷わず戻れるように）
+
+### 次にやること
+
+- **LINE Developers ConsoleのWebhook URLを新しいVercel本番URLに変更する必要あり**（`https://webapp-six-omega-78.vercel.app/api/line-webhook`）。これをやらないとLINEからのメッセージが届かない → ユーザーに依頼済み、実施状況は次回確認
+- 今後の開発・確認作業は、devサーバー・ngrokではなくVercelへの都度デプロイ（`vercel deploy --prod`）で行う想定
+
+### 困っていること / 質問
+
+- 特になし
+
+### 使用した Claude Code 機能
+
+- Plan Mode（色消失バグの原因調査、根本原因が確認できるまで実装に進まないため）
+- Exploreサブエージェント（コードベースの網羅的再監査）
+- Playwright（本番/プレビュー環境の自動ブラウザ検証）
+- Vercel CLI / MCP
+
 ## 2026-09-01
 
 ### やったこと
