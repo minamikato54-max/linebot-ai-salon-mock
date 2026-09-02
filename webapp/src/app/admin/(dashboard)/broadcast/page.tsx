@@ -1,4 +1,5 @@
 import { BroadcastForm } from "./BroadcastForm";
+import { BackToHomeButton } from "@/components/BackToHomeButton";
 
 export default async function BroadcastPage({
   searchParams,
@@ -8,7 +9,8 @@ export default async function BroadcastPage({
   const { sent, error } = await searchParams;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 pb-20">
+      <BackToHomeButton />
       <h1 className="text-lg font-semibold text-stone-800">お知らせを送る</h1>
       <p className="text-sm text-stone-800">
         入力した内容がLINE友だち全員に届きます。送信前に必ず内容を確認してください。

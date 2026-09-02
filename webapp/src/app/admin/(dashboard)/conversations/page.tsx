@@ -1,4 +1,5 @@
 import { getRecentConversations } from "@/lib/conversations";
+import { BackToHomeButton } from "@/components/BackToHomeButton";
 
 function formatDateTime(iso: string): string {
   return new Date(iso).toLocaleString("ja-JP", {
@@ -12,7 +13,8 @@ export default async function ConversationsPage() {
   const conversations = await getRecentConversations(50);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 pb-20">
+      <BackToHomeButton />
       <p className="text-sm text-stone-800">直近50件を表示しています</p>
 
       {conversations.length === 0 && (

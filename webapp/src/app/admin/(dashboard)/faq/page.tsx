@@ -1,13 +1,15 @@
 import { getAllFaq } from "@/lib/faq";
 import { ButtonLink } from "@/components/Button";
 import { DeleteButton } from "@/components/DeleteButton";
+import { BackToHomeButton } from "@/components/BackToHomeButton";
 import { deleteFaqAction } from "./actions";
 
 export default async function FaqListPage() {
   const faqRows = await getAllFaq();
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 pb-20">
+      <BackToHomeButton />
       <ButtonLink href="/admin/faq/new">＋ 新しいFAQを追加</ButtonLink>
 
       {faqRows.length === 0 && (
