@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { logout } from "@/app/admin/logout-action";
 
+// ログイン必須の管理画面はビルド時に静的生成すべきではない（常に最新データを表示する必要があり、
+// ビルド環境からのSupabase接続がエラーになるとビルド自体が失敗してしまうため）
+export const dynamic = "force-dynamic";
+
 export default function AdminLayout({
   children,
 }: {
