@@ -37,8 +37,6 @@
 | Vercel          | Webサイトの公開（本番環境）  | https://vercel.com                   |
 | OpenAI          | AIによる自動回答生成         | https://platform.openai.com          |
 
-> 📷 **スクリーンショットを挿入する場所**: 上記5サービスの管理画面トップページのスクリーンショットがあると、初めて触る人が迷いません。
-
 ---
 
 ## 3. パソコンに入れておくもの
@@ -115,7 +113,13 @@ ADMIN_PASSWORD=
 | `OWNER_LINE_USER_ID`            | 未対応質問の通知を送る先（オーナー様個人のLINE ID）                        | 「運用マニュアル」を参照                                                                                    |
 | `ADMIN_PASSWORD`                | 管理画面ログイン用のパスワード                                             | 任意の文字列を決めて設定（オーナー様に伝える）                                                              |
 
-> 📷 **スクリーンショットを挿入する場所**: LINE Developers Consoleのチャネルシークレットとアクセストークンがそれぞれどこに表示されるかの画面。SupabaseのAPI設定画面。
+![LINE Developers ConsoleのMessaging API設定画面。チャネルアクセストークン（長期）のセクションが表示されている](./images/line-access-token-location.png)
+
+![LINE Developers Consoleのチャネル基本設定画面。チャネルシークレットの値は黒塗りで隠している](./images/line-channel-basic-settings-redacted.png)
+
+_（チャネルシークレットの実際の値は黒塗りしています。この値は絶対に公開しないでください）_
+
+![SupabaseのAPI Keys設定画面。Publishable key（公開しても安全な鍵）とSecret key（マスク済み）が表示されている](./images/supabase-api-keys.png)
 
 ---
 
@@ -126,7 +130,7 @@ ADMIN_PASSWORD=
 1. Supabaseで新規プロジェクトを作成
 2. `webapp/supabase/migrations/` フォルダの中にあるSQLファイルの内容を、Supabaseダッシュボードの「SQL Editor」で実行する（`faq`・`menus`・`conversations`の3つの表が作られます）
 
-> 📷 **スクリーンショットを挿入する場所**: Supabaseの「SQL Editor」画面、実行後にテーブル一覧が表示された画面。
+![SupabaseのSQL Editorでmigrationを実行した後の画面。「Success. No rows returned」と成功メッセージが表示されている](./images/supabase-sql-editor-success.png)
 
 ---
 
@@ -137,7 +141,9 @@ ADMIN_PASSWORD=
 3. 手順6で設定した `LINE_CHANNEL_SECRET` と `LINE_CHANNEL_ACCESS_TOKEN` を取得・設定
 4. 「応答メッセージ」設定で、LINE公式アカウントの自動あいさつ等をオフにする（botの応答と重複するため）
 
-> 📷 **スクリーンショットを挿入する場所**: チャネル作成画面、応答設定画面。
+![LINE Official Account Managerの応答設定画面。あいさつメッセージがオフ、Webhookがオンになっている状態](./images/line-response-settings.png)
+
+![LINE公式アカウントの新規作成フォーム。アカウント名・メールアドレス・業種などを入力する画面（未入力の状態）](./images/line-channel-create-form.png)
 
 ---
 
@@ -189,7 +195,9 @@ npm run dev
 3. 「検証」ボタンを押して成功することを確認
 4. 「Webhookの利用」をオンにする
 
-> 📷 **スクリーンショットを挿入する場所**: Webhook URL入力欄と「検証」ボタン、成功時の表示。
+![LINE Developers ConsoleのWebhook URL入力欄。本番URLが入力されている状態](./images/line-webhook-url-input.png)
+
+![Webhook URLの「検証」ボタンを押した後、「成功」ダイアログが表示された状態。Webhookの利用もオンになっている](./images/line-webhook-verify-success.png)
 
 ---
 
