@@ -69,7 +69,7 @@ git clone <このプロジェクトのGitHubリポジトリURL>
 cd <取得したフォルダ名>/webapp
 ```
 
-> 📷 **スクリーンショットを挿入する場所**: GitHubリポジトリのページで「Code」ボタンを押してURLをコピーする画面。
+![GitHubリポジトリのページで「Code」ボタンを押した状態。クローン用URLが表示されている](./images/github-clone-url.png)
 
 ---
 
@@ -184,7 +184,7 @@ npm run dev
 
 > ⚠️ **重要**: Vercelの新規プロジェクトには「Deployment Protection（アクセス制限）」がデフォルトでオンになっており、これがオンのままだとLINEからの通知が届きません。Vercelダッシュボード →対象プロジェクト → Settings → Deployment Protection →「Require Log In」をオフにしてください。
 
-> 📷 **スクリーンショットを挿入する場所**: Vercelダッシュボードのプロジェクト設定画面、Deployment Protectionのトグルスイッチ。
+![Vercelのプロジェクト設定 → Deployment Protection画面。「Require Log In」がオフになっている状態](./images/vercel-deployment-protection.png)
 
 ---
 
