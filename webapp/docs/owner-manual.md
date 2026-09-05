@@ -12,8 +12,6 @@ https://github.com/minamikato54-max/linebot-ai-salon-mock/blob/main/webapp/docs/
 
 **よく見る場合は、ホーム画面に追加しておくと次回から探さずに開けて便利です**（Safariの場合: 共有ボタン →「ホーム画面に追加」／Chromeの場合: メニュー →「ホーム画面に追加」）。
 
-> 📷 **スクリーンショットを挿入する場所**: スマホのブラウザでこのURLを開いた直後の画面（マニュアルのタイトルが表示されている状態）
-
 ---
 
 ## 1. 管理画面の開き方
@@ -51,8 +49,6 @@ https://github.com/minamikato54-max/linebot-ai-salon-mock/blob/main/webapp/docs/
 
 - 編集: 内容を直したいときに押す
 - 削除: 押すと確認の表示が出るので、本当に消してよければもう一度押す（誤操作防止のため2段階になっています）
-
-> 📷 **スクリーンショットを挿入する場所**: 「＋ 新しいFAQを追加」を押した後の入力画面
 
 ![FAQ一覧画面。編集（緑）・削除（赤）ボタンが並んでいる](./images/owner-faq-list.jpg)
 
