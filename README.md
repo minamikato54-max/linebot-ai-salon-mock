@@ -39,13 +39,13 @@
 
 ## スクリーンショット
 
+![LINEでお客様が質問し、botが自動回答している会話画面](./webapp/docs/images/line-chat-conversation.jpg)
+
+![管理画面のホーム画面。FAQ・メニュー・会話ログ・お知らせ配信の4つのボタンが並んでいる](./webapp/docs/images/owner-admin-home.jpg)
+
 ![会話ログ画面。オレンジ色の「要対応」バッジが目印](./webapp/docs/images/owner-conversations.jpg)
 
-> 📷 **スクリーンショットを挿入する場所（残り）**
->
-> 1. LINEでお客様が質問し、botが自動回答している会話画面
-> 2. 管理画面ホーム（FAQ/メニュー/会話ログ/お知らせ配信の4項目が並ぶ画面）
-> 3. お知らせ配信画面（内容確認ステップの画面）
+![お知らせ配信の確認画面。入力内容のプレビューと「送信する」「内容を直す」ボタンが表示されている](./webapp/docs/images/owner-broadcast-confirm.jpg)
 
 ## 公開URL
 
